@@ -1,0 +1,9 @@
+#define M_HITHER 0.001
+#define M_YON 2000
+#define M 2000
+#define SIMPLE_COLOR 0
+#define TEXTURE_COLOR 1
+#define MAX_LIGHT_OBJ_RES  200
+#define N_DIM 4
+#define SCREEN_WIDTH  800
+#define SCREEN_HEIGHT 800
