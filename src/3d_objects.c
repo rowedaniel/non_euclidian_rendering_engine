@@ -9,11 +9,11 @@
 
 // ================ Sphere stuff ===============
 double sphere_SDF(double point[N_DIM]) {
-    // spherical coords:
-    return point[1] -1;
-    // x,y,z
-    /* // f(x,y,z) = x^2 + y^2 + z^2 - 1 */
-    /* return vector_dot_product(point, point) - 1; */
+    // f(x,y,z) = x^2 + y^2 + z^2 - 1
+    double point_no_time[N_DIM];
+    vector_copy(point_no_time, point);
+    point_no_time[0] = 0;
+    return vector_dot_product(point_no_time, point_no_time) - 1;
 }
 
 double inv_sphere_SDF(double point[N_DIM]) {
@@ -106,32 +106,35 @@ int hyperboloid_to_parametric(double point[N_DIM], double P[2])
 //
 void Draw_ellipsoid (int onum)
 {
-    int n,i ;
-    double t, xyz[N_DIM] ;
+    /* int n,i ; */
+    /* double t, point[N_DIM] ; */
 
     // spherical
-    const double theta = M_PI / 2;
-    const double r = 1;
-    xyz[0] = 0;
-    xyz[1] = r;
-    xyz[2] = theta;
-    for(double phi=0; phi < 2*M_PI; phi += M_PI/400) {
-        xyz[3] = phi;
-        matrix_mult_pt(xyz, obmat[onum], xyz);
-        debug_draw_point(xyz, color[onum][0],color[onum][1],color[onum][2], 1);
-    }
+    /* const double theta = M_PI / 2; */
+    /* const double r = 1; */
+    /* for(double phi=0; phi < 2*M_PI; phi += M_PI/400) { */
+    /*     point[0] = 0; */
+    /*     point[1] = r; */
+    /*     point[2] = theta; */
+    /*     point[3] = phi; */
+    /*     matrix_mult_pt(point, obmat[onum], point); */
+    /*     debug_draw_point(point, color[onum][0],color[onum][1],color[onum][2], 1); */
+    /* } */
 
     // Euclidean
-    /* n = 10000 ; */
-    /* for (i = 0 ; i < n ; i++) { */
-    /*     t = i*2*M_PI/n ; */
-    /*     xyz[0] = cos(t) ; */
-    /*     xyz[1] = sin(t) ; */
-    /*     xyz[2] = 0 ; */
-    /*     matrix_mult_pt(xyz, obmat[onum], xyz) ; */
-
-    /*     debug_draw_point(xyz, color[onum][0],color[onum][1],color[onum][2], 1); */
-    /* } */
+    int n,i ;
+    double t, point[N_DIM] ;
+    n = 10000 ;
+    for (i = 0 ; i < n ; i++) {
+        t = i*2*M_PI/n ;
+        point[0] = 0;
+        point[1] = cos(t) ;
+        point[2] = sin(t) ;
+        point[3] = 0 ;
+        matrix_mult_pt(point, obmat[onum], point) ;
+        to_spherical(point, 1, point);
+        debug_draw_point(point, color[onum][0],color[onum][1],color[onum][2], 1);
+    }
 }
 
 void Draw_plane (int onum)

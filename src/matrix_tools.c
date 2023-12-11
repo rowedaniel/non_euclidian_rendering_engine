@@ -75,10 +75,10 @@ int matrix_mult_pt (double P[N_DIM],   double m[N_DIM+1][N_DIM+1], double Q[N_DI
     double sum;
     int r,c;
 
-    for (r = 0; r < N_DIM+1; r++ ) {
+    for (r = 0; r < N_DIM; r++ ) {
         sum = 0.0;
-        for (c = 0; c < N_DIM+1; c++ ) {
-            sum = sum + m[r][c] * Q[c];
+        for (c = 0; c < N_DIM; c++ ) {
+            sum += m[r][c] * Q[c];
         }
         out[r] = sum + m[r][N_DIM];
     }

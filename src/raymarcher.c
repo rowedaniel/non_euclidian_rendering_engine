@@ -24,7 +24,7 @@ void path_second_deriv(double point[N_DIM], double V[N_DIM], double second_deriv
         second_deriv[i] = 0;
         for(int j=0; j<N_DIM; ++j) {
             for(int k=0; k<N_DIM; ++k) {
-                second_deriv[i] += chris_sym[i][j][k] * V[j] * V[k];
+                second_deriv[i] += -chris_sym[i][j][k] * V[j] * V[k];
             }
         }
     }
@@ -50,8 +50,8 @@ int get_color(int onum, double P[2], double rgb[3])
     return 0;
 }
 
-double delta_t = 0.0001;
-double max_ray_distance = 100000;
+double delta_t = 0.01;
+double max_ray_distance = 10000;
 
 int cast_ray(double Rsource[N_DIM], double Rtip[N_DIM], double point[N_DIM], double V[N_DIM])
 // casts a ray out from Rsource to Rtip, and checks if it intersects with any object.
@@ -104,17 +104,29 @@ int cast_ray(double Rsource[N_DIM], double Rtip[N_DIM], double point[N_DIM], dou
 
         {
             // DEBUG
-            debug_draw_point(point, 1, 1, 1, 1);
+            if(point[1] >=0 && point[1] < 1) {
+                debug_draw_point(point, 0.5, 1, 1, 1);
+            } else if(point[1] >= 0) {
+                debug_draw_point(point, 1, 0.5, 1, 1);
+            } else {
+                debug_draw_point(point, 1, 1, 0.5, 1);
+            }
         }
 
         // check for collision with any object
         for(onum=0; onum < num_objects; ++onum) {
-            // transform point to object space
-            matrix_mult_pt(obj_point, obinv[onum], next_point);
+            // to rectangular coords
+            vector_copy(obj_point, next_point);
+            int dim = to_cartesian(obj_point, obj_point);
+            if(obj_wormhole_side[onum] == dim) {
+                // transform point to object space
+                matrix_mult_pt(obj_point, obinv[onum], obj_point);
 
-            double sdf = SDF[onum](obj_point);
-            if (sdf <= 0) {
-                return onum;
+
+                double sdf = SDF[onum](obj_point);
+                if (sdf <= 0) {
+                    return onum;
+                }
             }
         }
 
