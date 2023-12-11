@@ -11,13 +11,13 @@ void debug_draw_point(double point[N_DIM],
                       float b,
                       float a)
 {
-    // get screen coords
-    int s[2];
-    coords_to_screen(s, point);
+    /* // get screen coords */
+    /* int s[2]; */
+    /* coords_to_screen(s, point); */
 
-    // draw point
-    SDL_SetRenderDrawColor(debug_renderer, torgb(r), torgb(g), torgb(b), torgb(a));
-    SDL_RenderDrawPoint(debug_renderer, s[0], s[1]);
+    /* // draw point */
+    /* SDL_SetRenderDrawColor(debug_renderer, torgb(r), torgb(g), torgb(b), torgb(a)); */
+    /* SDL_RenderDrawPoint(debug_renderer, s[0], s[1]); */
 }
 
 void debug_fill_circle(double point[N_DIM],
@@ -28,19 +28,19 @@ void debug_fill_circle(double point[N_DIM],
                        float a
                       ) {
 
-    // get screen coords
-    int s[2];
-    coords_to_screen(s, point);
+    /* // get screen coords */
+    /* int s[2]; */
+    /* coords_to_screen(s, point); */
 
-    // fill circle
-    SDL_SetRenderDrawColor(debug_renderer, torgb(r), torgb(g), torgb(b), torgb(a));
-    for(int dx = -radius; dx <= radius; dx++) {
-        for(int dy = -radius; dy <= radius; dy++) {
-            if(dx * dx + dy * dy <= radius * radius) {
-                SDL_RenderDrawPoint(debug_renderer, s[0] + dx, s[1] + dy);
-            }
-        }
-    }
+    /* // fill circle */
+    /* SDL_SetRenderDrawColor(debug_renderer, torgb(r), torgb(g), torgb(b), torgb(a)); */
+    /* for(int dx = -radius; dx <= radius; dx++) { */
+    /*     for(int dy = -radius; dy <= radius; dy++) { */
+    /*         if(dx * dx + dy * dy <= radius * radius) { */
+    /*             SDL_RenderDrawPoint(debug_renderer, s[0] + dx, s[1] + dy); */
+    /*         } */
+    /*     } */
+    /* } */
 }
 
 void debug_draw_line(double point1[N_DIM],

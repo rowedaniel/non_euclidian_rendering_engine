@@ -130,7 +130,11 @@ void vector_copy(double a[N_DIM], double b[N_DIM]) {
 }
 
 double vector_dot_product(double a[N_DIM], double b[N_DIM]) {
-    return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+    double sum = 0;
+    for(int i=0; i<N_DIM; ++i) {
+        sum += a[i]*b[i];
+    }
+    return sum;
 }
 
 double vector_magnitude(double a[N_DIM]) {

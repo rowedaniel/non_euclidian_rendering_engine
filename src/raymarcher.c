@@ -113,6 +113,7 @@ int cast_ray(double Rsource[N_DIM], double Rtip[N_DIM], double point[N_DIM], dou
             }
         }
 
+
         // check for collision with any object
         for(onum=0; onum < num_objects; ++onum) {
             // to rectangular coords
@@ -125,11 +126,18 @@ int cast_ray(double Rsource[N_DIM], double Rtip[N_DIM], double point[N_DIM], dou
 
                 double sdf = SDF[onum](obj_point);
                 if (sdf <= 0) {
+                    /* if(onum != 200) { */
+                    /*     printf("found object %d\n", onum); */
+                    /* } */
+                    /* printf("sdf is %f\n", sdf); */
+                    /* printf("point is:\n"); */
+                    /* vector_print(point); */
+                    /* printf("obj_point is:\n"); */
+                    /* vector_print(obj_point); */
                     return onum;
                 }
             }
         }
-
     }
 
     return -1;
@@ -150,7 +158,7 @@ void get_normal(double normal[N_DIM], int onum, double intersection[N_DIM]) {
     vector_normalize(normal, normal);
 }
 
-int ray_to_rgb_recursive(double Rsource[N_DIM], double Rtip[N_DIM], double argb[N_DIM], bool do_lightmodel, int n)
+int ray_to_rgb_recursive(double Rsource[N_DIM], double Rtip[N_DIM], double argb[3], bool do_lightmodel, int n)
 {
     // default color to black
     for(int j=0; j<3; ++j) {
