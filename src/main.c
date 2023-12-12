@@ -327,17 +327,20 @@ int main(int argc, char* argv[])
 
 
 
-    pthread_t thread[SCREEN_WIDTH];
-    struct render_args args[SCREEN_WIDTH];
-    const double res = 50;
-    /* for(int i=0; i<SCREEN_WIDTH; i+=res) { */
-    for(int i=300; i<500; i+=res) {
-        args[i].min_i = i;
-        args[i].max_i = i+1;
-        args[i].min_j = 375;
-        args[i].max_j = 425;
-        /* args[i].min_j = 0; */
-        /* args[i].max_j = SCREEN_HEIGHT; */
+    const int n_threads = SCREEN_WIDTH/16;
+    pthread_t thread[n_threads];
+    printf("threads allotted: %d\n", n_threads);
+    struct render_args args[n_threads];
+    const int res = SCREEN_WIDTH/2/n_threads;
+    for(int i=2; i<n_threads; ++i) {
+        printf("doing %d to %d\n", i*res, (i+1)*res);
+    /* for(int i=300; i<500; i+=res) { */
+        args[i].min_i = i*res;
+        args[i].max_i = (i+1)*res;
+        /* args[i].min_j = 375; */
+        /* args[i].max_j = 425; */
+        args[i].min_j = 16;
+        args[i].max_j = SCREEN_HEIGHT/2;
         vector_copy(args[i].Rsource, Rsource);
         vector_copy(args[i].eye, eye);
 
@@ -357,30 +360,45 @@ int main(int argc, char* argv[])
         {
             break;
         } else if(e.type == SDL_MOUSEBUTTONDOWN) {
-            printf("clicked at %d, %d\n", e.button.x, e.button.y);
-            const int i = e.button.x;
-            const int j = e.button.y;
+            /* printf("clicked at %d, %d\n", e.button.x, e.button.y); */
+            /* const int i = e.button.x; */
+            /* const int j = e.button.y; */
 
-            pthread_join(thread[next_free_thread], NULL);
-            args[next_free_thread].min_i = i-5;
-            args[next_free_thread].max_i = i+5;
-            args[next_free_thread].min_j = j-5;
-            args[next_free_thread].max_j = j+5;
-            vector_copy(args[next_free_thread].Rsource, Rsource);
-            vector_copy(args[next_free_thread].eye, eye);
+            /* pthread_join(thread[next_free_thread], NULL); */
+            /* args[next_free_thread].min_i = i-5; */
+            /* args[next_free_thread].max_i = i+5; */
+            /* args[next_free_thread].min_j = j-5; */
+            /* args[next_free_thread].max_j = j+5; */
+            /* vector_copy(args[next_free_thread].Rsource, Rsource); */
+            /* vector_copy(args[next_free_thread].eye, eye); */
 
-            pthread_create(&thread[next_free_thread], NULL, render_grid, (void *) &args[next_free_thread]);
-            next_free_thread = (next_free_thread + 1) % SCREEN_WIDTH;
+            /* pthread_create(&thread[next_free_thread], NULL, render_grid, (void *) &args[next_free_thread]); */
+            /* next_free_thread = (next_free_thread + 1) % SCREEN_WIDTH; */
 
             /* render_pixel(eye, Rsource, i, j); */
         }
         draw_all_points(renderer);
     }
 
+    for(int i=0; i<n_threads; ++i) {
+        pthread_join(thread[i], NULL);
+    }
+
     // clean up SDL resources
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+
+    // write image to file
+    FILE *f = fopen("image.ppm", "w");
+    fprintf(f, "P3\n%d %d\n%d\n", SCREEN_WIDTH, SCREEN_HEIGHT, 255);
+    for(int j=SCREEN_HEIGHT-1; j>=0; --j) {
+        for(int i=0; i<SCREEN_WIDTH; ++i) {
+            fprintf(f, "%d %d %d ", all_points[i][j][0], all_points[i][j][1], all_points[i][j][2]);
+        }
+        fprintf(f, "\n");
+    }
+    fclose(f);
 
     return 0;
 }
