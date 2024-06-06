@@ -4,8 +4,6 @@
  * @author Daniel Neshyba-Rowe
  */
 
-#include <stdio.h>
-
 /**
  * @struct Vector2d
  * @brief 2D integer vector
@@ -58,3 +56,34 @@ typedef union VectorN {
   double data[N_DIM];
 } VectorN;
 
+
+/**
+ * @brief Print a double-precision vector
+ * @param vector The data contained in the vector
+ * @param n The size (dimension) of the vector
+*/
+void print_vector(double vector[], int n);
+
+/**
+ * @brief Print a vector of same dimension as the space
+ * @param vector The N-dimensional vector
+*/
+void print_vectorN(VectorN vector);
+
+/**
+ * @brief Print a 3-dimensional vector
+ * @param vector The 3-dimensional vector
+*/
+void print_vector3(Vector3 vector);
+
+/**
+ * @brief Print a 2-dimensional vector
+ * @param vector The 2-dimensional vector
+*/
+void print_vector2(Vector2 vector);
+
+/**
+ * @brief Print a 2-dimensional integer vector
+ * @param vector The vector
+*/
+void print_vector2d(Vector2d vector);
