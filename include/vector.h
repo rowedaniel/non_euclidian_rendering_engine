@@ -21,6 +21,21 @@ typedef union Vector2d {
 } Vector2d;
 
 /**
+ * @struct Vector2
+ * @brief 2D vector
+ */
+typedef union Vector2 {
+  struct {
+    double x, y;
+  };
+  struct {
+    double u, v;
+  };
+  double data[2];
+} Vector2;
+
+
+/**
  * @struct Vector3
  * @brief 3D vector
  */
