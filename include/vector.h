@@ -4,6 +4,7 @@
  * @author Daniel Neshyba-Rowe
  */
 
+#include "dim.h"
 /**
  * @struct Vector2d
  * @brief 2D integer vector
