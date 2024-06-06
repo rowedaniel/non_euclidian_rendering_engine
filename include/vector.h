@@ -4,9 +4,7 @@
  * @author Daniel Neshyba-Rowe
  */
 
-
-// TODO: figure out how to handle adaptive dimensionality at compile-time
-#include "dim.h"
+#include <stdio.h>
 
 /**
  * @struct Vector2d
