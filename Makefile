@@ -36,25 +36,42 @@ clean:
 
 # Tests
 
-TEST = $(BUILD)/tests
-TEST_SRCS := $(addprefix tests/,	\
-		vector_test3.c		\
-)
-TEST_OBJS := $(patsubst %.c,$(BUILD)/%.o, $(TEST_SRCS))
-TEST_EXES := $(patsubst %.c,$(BUILD)/%, $(TEST_SRCS))
-LDFLAGS := -L$(BUILD)/$(N_DIM)d
+TEST := $(BUILD)/tests
+TEST_COMMON := $(TEST)/common
+TEST_COMMON_SRCS = $(shell find tests/common/*)
+TEST_COMMON_OBJS = $(patsubst %.c,$(BUILD)/%.o, $(TEST_COMMON_SRCS))
+TEST_COMMON_EXES = $(patsubst %.c,$(BUILD)/%, $(TEST_COMMON_SRCS))
+
+# dimension-specific tests
+TEST_DIM = $(TEST)/$(N_DIM)d
+TEST_SRCS = $(shell find tests/$(N_DIM)d/*)
+TEST_OBJS = $(patsubst %.c,$(BUILD)/%.o, $(TEST_SRCS))
+TEST_EXES = $(patsubst %.c,$(BUILD)/%, $(TEST_SRCS))
+LDFLAGS = -L$(BUILD)/$(N_DIM)d -lnerm
 
 # build and run all tests
-test: $(TEST_EXES)
-	@./$(TEST)/vector_test3
-# General rule for test object files
-$(TEST_EXES): $(TEST)/%: tests/%.c $(TEST) $(DIM_BUILD)/nerm
-	$(CC) $(CFLAGS) $(LDFLAGS) -lnerm $< -o $@
+test: $(TEST_COMMON_EXES) $(TEST_EXES)
+	@$(TEST_COMMON_EXES)
+	@$(TEST_EXES)
 
-# General rule for test object files
-$(TEST)/%3.o: tests/%.c $(TEST) build/3/nerm
-	$(CC) $(CFLAGS) $(LDFLAGS) -lnerm -c $< -o $@
+# For common tests
+$(TEST_COMMON_EXES): $(TEST_COMMON)/%: $(TEST_COMMON)/%.o
+	$(CC) $(LDFLAGS) $< -o $@
+$(TEST_COMMON_OBJS): $(TEST_COMMON)/%.o: tests/common/%.c $(TEST_COMMON) $(DIM_BUILD)/nerm
+	$(CC) $(CFLAGS) -c $< -o $@
 
+# For dimension-specific tests:
+$(TEST_EXES): $(TEST_DIM)/%: $(TEST_DIM)/%.o
+	$(CC) $(LDFLAGS) $< -o $@
+$(TEST_OBJS): $(TEST_DIM)/%.o: tests/$(N_DIM)d/%.c $(TEST_DIM) $(DIM_BUILD)/nerm
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+# directory tree
+$(TEST_DIM): $(TEST)
+	@mkdir -p $(TEST_DIM)
+$(TEST_COMMON): $(TEST)
+	@mkdir -p $(TEST_COMMON)
 $(TEST): $(BUILD)
-	@mkdir -p $(TEST)
+	@mkdir -p $(TEST) $(TEST)/common
 
