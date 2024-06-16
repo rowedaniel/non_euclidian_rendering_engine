@@ -56,13 +56,13 @@ test: $(TEST_COMMON_EXES) $(TEST_EXES)
 
 # For common tests
 $(TEST_COMMON_EXES): $(TEST_COMMON)/%: $(TEST_COMMON)/%.o
-	$(CC) $(LDFLAGS) $< -o $@
+	$(CC) $< $(LDFLAGS) -o $@
 $(TEST_COMMON_OBJS): $(TEST_COMMON)/%.o: tests/common/%.c $(TEST_COMMON) $(DIM_BUILD)/nerm
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # For dimension-specific tests:
 $(TEST_EXES): $(TEST_DIM)/%: $(TEST_DIM)/%.o
-	$(CC) $(LDFLAGS) $< -o $@
+	$(CC) $< $(LDFLAGS) -o $@
 $(TEST_OBJS): $(TEST_DIM)/%.o: tests/$(N_DIM)d/%.c $(TEST_DIM) $(DIM_BUILD)/nerm
 	$(CC) $(CFLAGS) -c $< -o $@
 
