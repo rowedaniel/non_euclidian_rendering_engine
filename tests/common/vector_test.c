@@ -2,6 +2,19 @@
 #include <stdio.h>
 #include <assert.h>
 
+void test_vector2_basic(void) {
+    Vector3 vec = {{0.0, 1.0}};
+    assert(vec.r == 0.0 && vec.x == 0.0);
+    assert(vec.g == 1.0 && vec.y == 1.0);
+}
+
+void test_vector3_basic(void) {
+    Vector3 vec = {{0.0, 1.0, 100.123}};
+    assert(vec.r == 0.0 && vec.x == 0.0);
+    assert(vec.g == 1.0 && vec.y == 1.0);
+    assert(vec.b == 100.123 && vec.z == 100.123);
+}
+
 void test_print_vector2d(void) {
     Vector2d vec = {{100, -3}};
     printf("100 -3 = ");
@@ -58,6 +71,8 @@ void test_vec3_dot(void) {
 }
 
 int main() {
+    test_vector2_basic();
+    test_vector3_basic();
     test_print_vector2d();
     test_print_vector2();
     test_print_vector3();
