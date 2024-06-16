@@ -49,3 +49,23 @@ VectorN vecN_add(VectorN vec1, VectorN vec2) {
     vec_add(vec1.data, vec2.data, N_DIM, out.data);
     return out;
 }
+
+double dot(double vec1[], double vec2[], int n) {
+    double total = 0;
+    for(int i=0; i<n; ++i) {
+        total += vec1[i]*vec2[i];
+    }
+    return total;
+}
+
+double vec2_dot(Vector2 vec1, Vector2 vec2) {
+    return dot(vec1.data, vec2.data, 2);
+}
+
+double vec3_dot(Vector3 vec1, Vector3 vec2) {
+    return dot(vec1.data, vec2.data, 3);
+}
+
+double vecN_dot(VectorN vec1, VectorN vec2) {
+    return dot(vec1.data, vec2.data, N_DIM);
+}

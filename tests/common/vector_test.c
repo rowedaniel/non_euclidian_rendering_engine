@@ -39,10 +39,31 @@ void test_vec3_add(void) {
     printf(".");
 }
 
+void test_dot(void) {
+    double vec1[] = {10.0, 0.5, 0.0};
+    double vec2[] = {0.0, 2.0, 0.123};
+    assert(dot(vec1, vec2, 3) == 1.0);
+}
+
+void test_vec2_dot(void) {
+    Vector2 vec1 = {{10.0, 0.5}};
+    Vector2 vec2 = {{0.0, 2.0}};
+    assert(vec2_dot(vec1, vec2) == 1.0);
+}
+
+void test_vec3_dot(void) {
+    Vector3 vec1 = {{10.0, 0.5, 0.0}};
+    Vector3 vec2 = {{0.0, 2.0, 0.123}};
+    assert(vec3_dot(vec1, vec2) == 1.0);
+}
+
 int main() {
     test_print_vector2d();
     test_print_vector2();
     test_print_vector3();
     test_vec2_add();
     test_vec3_add();
+    test_dot();
+    test_vec2_dot();
+    test_vec3_dot();
 }

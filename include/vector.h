@@ -96,3 +96,13 @@ void vec_add(double vec1[], double vec2[], int n, double out[]);
 Vector2 vec2_add(Vector2 vec1, Vector2 vec2);
 Vector3 vec3_add(Vector3 vec1, Vector3 vec2);
 VectorN vecN_add(VectorN vec1, VectorN vec2);
+/**
+ * @brief Compute the dot product of two double-precision vectors
+ * @param vec1 The first vector
+ * @param vec2 The second vector
+ * @param n The dimensionality of the vectors
+*/
+double dot(double vec1[], double vec2[], int n);
+double vec2_dot(Vector2 vec1, Vector2 vec2);
+double vec3_dot(Vector3 vec1, Vector3 vec3);
+double vecN_dot(VectorN vec1, VectorN vecN);
