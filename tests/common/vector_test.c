@@ -70,7 +70,7 @@ void test_vec3_dot(void) {
     assert(vec3_dot(vec1, vec2) == 1.0);
 }
 
-int main() {
+int main(void) {
     test_vector2_basic();
     test_vector3_basic();
     test_print_vector2d();

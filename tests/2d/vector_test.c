@@ -14,7 +14,7 @@ void test_vecN_dot(void) {
     assert(vecN_dot(vec1, vec2) == 1.0);
 }
 
-int main() {
+int main(void) {
     test_print_vectorN();
     test_vecN_dot();
 }

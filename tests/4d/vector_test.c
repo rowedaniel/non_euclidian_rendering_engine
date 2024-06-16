@@ -15,7 +15,7 @@ void test_vecN_dot(void) {
 }
 
 
-int main() {
+int main(void) {
     test_print_vectorN();
     test_vecN_dot();
 }
