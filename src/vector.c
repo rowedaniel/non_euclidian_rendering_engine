@@ -69,3 +69,14 @@ double vec3_dot(Vector3 vec1, Vector3 vec2) {
 double vecN_dot(VectorN vec1, VectorN vec2) {
     return dot(vec1.data, vec2.data, N_DIM);
 }
+
+Vector3 vec3_cross(Vector3 vec1, Vector3 vec2) {
+    Vector3 vec = {
+        {
+            vec1.y*vec2.z - vec1.z*vec2.y,
+            vec1.z*vec2.x - vec1.x*vec2.z,
+            vec1.x*vec2.y - vec1.y*vec2.x
+        }
+    };
+    return vec;
+}

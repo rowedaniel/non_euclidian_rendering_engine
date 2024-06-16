@@ -70,6 +70,15 @@ void test_vec3_dot(void) {
     assert(vec3_dot(vec1, vec2) == 1.0);
 }
 
+void test_vec3_cross(void) {
+    Vector3 vec1 = {{10.0, 0.5, 0.0}};
+    Vector3 vec2 = {{0.0, 2.0, 0.123}};
+    Vector3 cross = vec3_cross(vec1, vec2);
+    assert(cross.x == 0.0615);
+    assert(cross.y == -1.23);
+    assert(cross.z == 20.0);
+}
+
 int main(void) {
     test_vector2_basic();
     test_vector3_basic();
@@ -81,4 +90,5 @@ int main(void) {
     test_dot();
     test_vec2_dot();
     test_vec3_dot();
+    test_vec3_cross();
 }

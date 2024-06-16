@@ -106,3 +106,8 @@ double dot(double vec1[], double vec2[], int n);
 double vec2_dot(Vector2 vec1, Vector2 vec2);
 double vec3_dot(Vector3 vec1, Vector3 vec3);
 double vecN_dot(VectorN vec1, VectorN vecN);
+
+/**
+ * @brief Compute the cross product of two vectors
+*/
+Vector3 vec3_cross(Vector3 vec1, Vector3 vec2);
