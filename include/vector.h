@@ -24,13 +24,13 @@ typedef union Vector2d {
  * @brief 2D vector
  */
 typedef union Vector2 {
-  struct {
-    double x, y;
-  };
-  struct {
-    double u, v;
-  };
-  double data[2];
+    struct {
+        double x, y;
+    };
+    struct {
+        double u, v;
+    };
+    double data[2];
 } Vector2;
 
 
@@ -39,13 +39,13 @@ typedef union Vector2 {
  * @brief 3D vector
  */
 typedef union Vector3 {
-  struct {
-    double x, y, z;
-  };
-  struct {
-    double r, g, b;
-  };
-  double data[3];
+    struct {
+        double x, y, z;
+    };
+    struct {
+        double r, g, b;
+    };
+    double data[3];
 } Vector3;
 
 
@@ -54,7 +54,7 @@ typedef union Vector3 {
  * @brief vector of same dimension as space
  */
 typedef union VectorN {
-  double data[N_DIM];
+    double data[N_DIM];
 } VectorN;
 
 
