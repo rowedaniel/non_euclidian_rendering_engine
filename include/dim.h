@@ -1,3 +1,3 @@
 #ifndef N_DIM
-const int N_DIM = 4;
+#define N_DIM 4
 #endif
