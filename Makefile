@@ -28,6 +28,8 @@ $(BUILD):
 $(DIM_BUILD): $(BUILD)
 	mkdir -p $@ $@/src
 
+all: $(DIM_BUILD)/nerm
+
 # Clean up everything
 clean:
 	rm -rf $(BUILD)/
