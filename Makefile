@@ -49,10 +49,21 @@ TEST_OBJS = $(patsubst %.c,$(BUILD)/%.o, $(TEST_SRCS))
 TEST_EXES = $(patsubst %.c,$(BUILD)/%, $(TEST_SRCS))
 LDFLAGS = -L$(BUILD)/$(N_DIM)d -lnerm
 
-# build and run all tests
-test: $(TEST_COMMON_EXES) $(TEST_EXES)
-	@$(TEST_COMMON_EXES)
-	@$(TEST_EXES)
+# all tests
+test: test_common
+	@echo "testing 2d"
+	@make -s N_DIM=2 test_dim
+	@echo "testing 3d"
+	@make -s N_DIM=3 test_dim
+	@echo "testing 4d"
+	@make -s N_DIM=4 test_dim
+
+test_common: $(TEST_COMMON_EXES)
+	@echo "testing common"
+	@$(TEST_COMMON_EXES) | tests/format_test_output.sh
+
+test_dim: $(TEST_EXES)
+	@$(TEST_EXES) | tests/format_test_output.sh
 
 # For common tests
 $(TEST_COMMON_EXES): $(TEST_COMMON)/%: $(TEST_COMMON)/%.o

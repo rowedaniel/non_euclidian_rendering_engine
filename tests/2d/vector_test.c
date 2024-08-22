@@ -4,7 +4,7 @@
 
 void test_print_vectorN(void) {
     VectorN vec = {{1.0, 0.0}};
-    printf("1.000000 0.000000 = ");
+    printf("1.000000 0.000000 =");
     print_vectorN(vec);
 }
 
@@ -12,6 +12,7 @@ void test_vecN_dot(void) {
     VectorN vec1 = {{10.0, 0.5}};
     VectorN vec2 = {{0.0, 2.0}};
     assert(vecN_dot(vec1, vec2) == 1.0);
+    printf(".\n");
 }
 
 int main(void) {
