@@ -1,0 +1,17 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-iquote",
+      "include",
+      "-DN_DIM=3",
+      "-c",
+      "-o",
+      "build/3d/src/vector.o",
+      "src/vector.c"
+    ],
+    "directory": "/home/rowedaniel/personal/non_euclidian_rendering_engine",
+    "file": "/home/rowedaniel/personal/non_euclidian_rendering_engine/src/vector.c",
+    "output": "/home/rowedaniel/personal/non_euclidian_rendering_engine/build/3d/src/vector.o"
+  }
+]
