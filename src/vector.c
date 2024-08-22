@@ -24,3 +24,28 @@ void print_vector2d(Vector2d vector) {
         printf("%d ", vector.data[i]);
     printf("\n");
 }
+
+
+void vec_add(double vec1[], double vec2[], int n, double out[]) {
+    for(int i=0; i<n; ++i) {
+        out[i] = vec1[i] + vec2[i];
+    }
+}
+
+Vector2 vec2_add(Vector2 vec1, Vector2 vec2) {
+    Vector2 out;
+    vec_add(vec1.data, vec2.data, 2, out.data);
+    return out;
+}
+
+Vector3 vec3_add(Vector3 vec1, Vector3 vec2) {
+    Vector3 out;
+    vec_add(vec1.data, vec2.data, 3, out.data);
+    return out;
+}
+
+VectorN vecN_add(VectorN vec1, VectorN vec2) {
+    VectorN out;
+    vec_add(vec1.data, vec2.data, N_DIM, out.data);
+    return out;
+}

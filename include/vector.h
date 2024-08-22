@@ -88,3 +88,15 @@ void print_vector2(Vector2 vector);
  * @param vector The vector
 */
 void print_vector2d(Vector2d vector);
+
+
+/**
+ * @brief Add two vectors
+ * @param vec1 the first vector to add
+ * @param vec2 the second vector to add
+ * @param out pointer to write result to
+*/
+void vec_add(double vec1[], double vec2[], int n, double out[]);
+Vector2 vec2_add(Vector2 vec1, Vector2 vec2);
+Vector3 vec3_add(Vector3 vec1, Vector3 vec2);
+VectorN vecN_add(VectorN vec1, VectorN vec2);
