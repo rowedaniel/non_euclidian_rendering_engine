@@ -10,6 +10,7 @@ BUILD := build
 DIM_BUILD = $(addsuffix d, $(addprefix $(BUILD)/, $(N_DIM)))
 SRC_SRCS := $(addprefix src/,		\
 		vector.c		\
+		matrix.c		\
 )
 SRC_OBJS := $(patsubst %.c,$(DIM_BUILD)/%.o, $(SRC_SRCS))
 
@@ -62,10 +63,10 @@ test: test_common
 
 test_common: $(TEST_COMMON_EXES)
 	@echo "testing common"
-	@$(TEST_COMMON_EXES) | tests/format_test_output.sh
+	@($(patsubst %,% &, $(TEST_COMMON_EXES))) | tests/format_test_output.sh
 
 test_dim: $(TEST_EXES)
-	@$(TEST_EXES) | tests/format_test_output.sh
+	@($(patsubst %,% &, $(TEST_EXES))) | tests/format_test_output.sh
 
 # For common tests
 $(TEST_COMMON_EXES): $(TEST_COMMON)/%: $(TEST_COMMON)/%.o
