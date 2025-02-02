@@ -4,6 +4,7 @@
  * @author Daniel Neshyba-Rowe
  */
 
+#pragma once
 #include "dim.h"
 #include "vector.h"
 
